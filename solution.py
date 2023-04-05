@@ -13,6 +13,7 @@ def solution(p: float, x: np.array) -> tuple:
     # Не меняйте название функции и её аргументы
     alpha = 1 - p
     loc = len(x)
-    scale = np.var(x, ddof = 1)**2
-    return loc * scale / chi2.ppf(1 - alpha / 2, df = len(x)), \
-           loc * scale / chi2.ppf(alpha / 2, df = len(x))
+    s2 = np.var(x, ddof=1)
+    df = n - 1  
+    return np.mean(x) - (32**0.5 * df * s2 / chi2.ppf(1 - alpha / 2, df)) / loc ** 0.5, \
+           np.mean(x) + (32**0.5 * df * s2 / chi2.ppf(1 - alpha / 2, df)) / loc ** 0.5
