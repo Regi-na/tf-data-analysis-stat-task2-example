@@ -15,5 +15,5 @@ def solution(p: float, x: np.array) -> tuple:
     n = len(x)
     s2 = np.var(x, ddof=1)
     l = n - 1  
-    return x.std() - np.sqrt(np.var(x)) * norm.ppf(1 - alpha / 2) / np.sqrt(len(x)), \
-           x.std() - np.sqrt(np.var(x)) * norm.ppf(alpha / 2) / np.sqrt(len(x))
+    return np.sqrt(l * s2 / chi2.ppf(1 - alpha / 2, l)), \
+           np.sqrt(l * s2 / chi2.ppf(alpha / 2, l))
