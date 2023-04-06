@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-from scipy.stats import norm, chi2
+from scipy.stats import norm, chi2, kurtosis
 
 
 
@@ -15,5 +15,7 @@ def solution(p: float, x: np.array) -> tuple:
     n = len(x)
     s2 = np.var(x, ddof=1)
     l = n - 1  
-    return s2 * np.sqrt(l / chi2.ppf(1 - alpha / 2, l)), \
-           s2 * np.sqrt(l / chi2.ppf(alpha / 2, l))
+    #return s2 * np.sqrt(l / chi2.ppf(1 - alpha / 2, l)), \
+          # s2 * np.sqrt(l / chi2.ppf(alpha / 2, l))
+    return s2 + norm.ppf(alpha / 2, scale = np.sqrt((kurtosis(x)+2)/len(x) * s2)),
+           s2 + norm.ppf(1 - alpha / 2, scale = np.sqrt((kurtosis(x)+2)/len(x) * s2))
