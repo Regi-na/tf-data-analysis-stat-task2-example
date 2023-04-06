@@ -14,6 +14,6 @@ def solution(p: float, x: np.array) -> tuple:
     alpha = 1 - p
     loc = len(x)
     s2 = np.var(x, ddof=1)
-    df = n - 1  
+    df = loc - 1  
     return np.mean(x) - (32**0.5 * df * s2 / chi2.ppf(1 - alpha / 2, df)) / loc ** 0.5, \
            np.mean(x) + (32**0.5 * df * s2 / chi2.ppf(1 - alpha / 2, df)) / loc ** 0.5
