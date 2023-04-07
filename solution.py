@@ -29,6 +29,6 @@ def solution(p: float, x: np.array) -> tuple:
     chi2_right = chi2.ppf((1 + p) / 2, n - 1)
 
   # симметричный доверительный интервал
-    ci_left = np.sqrt((n - 1) * sample_std/ chi2_right)
-    ci_right = np.sqrt((n - 1) * sample_std/ chi2_left)
-    return(ci_left, ci_right)
+    ci_left = np.sqrt((n - 1) * s2**0.5/ chi2_right)
+    ci_right = np.sqrt((n - 1) * s2**0.5/ chi2_left)
+    return ci_left, ci_right
