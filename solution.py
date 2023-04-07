@@ -19,5 +19,5 @@ def solution(p: float, x: np.array) -> tuple:
           # s2 * np.sqrt(l / chi2.ppf(alpha / 2, l))
     #return np.sqrt(s2**2 * n / chi2.ppf(1 - alpha / 2, n)), \
      #      np.sqrt(s2**2 * n / chi2.ppf(alpha / 2, n))
-    return np.std(x)/(32**0.5) * l /chi2.ppf(alpha / 2, df = l) * np.mean(x), \
-           np.std(x)/(32**0.5) * l / chi2.ppf(1-alpha / 2, df = l) * np.mean(x)
+    return np.std(x)/(32**0.5) * l /chi2.ppf(alpha / 2, df = l), \
+           np.std(x)/(32**0.5) * l / chi2.ppf(1-alpha / 2, df = l)
