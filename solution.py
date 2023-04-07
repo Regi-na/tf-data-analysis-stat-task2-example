@@ -21,5 +21,14 @@ def solution(p: float, x: np.array) -> tuple:
      #      np.sqrt(s2**2 * n / chi2.ppf(alpha / 2, n))
     #return np.std(x)/(32**0.5) * l /chi2.ppf(alpha / 2, df = l), \
            #np.std(x)/(32**0.5) * l / chi2.ppf(1-alpha / 2, df = l)
-     return np.std(x)/(32**0.5) * l**0.5 /chi2.ppf(alpha / 2, df = l)**0.5, \
-            np.std(x)/(32**0.5) * l**0.5 / chi2.ppf(1-alpha / 2, df = l)**0.5
+    #return np.std(x) + np.std(x)/(32**0.5) * l**0.5 /chi2.ppf(1 - alpha / 2, df = l)**0.5, \
+     #       np.std(x) + np.std(x)/(32**0.5) * l**0.5 / chi2.ppf(alpha / 2, df = l)**0.5
+
+    sample_std = 32**0.5
+    chi2_left = chi2.ppf((1 - p) / 2, n - 1)
+    chi2_right = chi2.ppf((1 + p) / 2, n - 1)
+
+  # симметричный доверительный интервал
+    ci_left = np.sqrt((n - 1) * sample_std/ chi2_right)
+    ci_right = np.sqrt((n - 1) * sample_std/ chi2_left)
+    return(ci_left, ci_right)
